@@ -21,6 +21,7 @@ API_KEY=tu-api-key-secreta
 USE_DYNAMO=false           # true → DynamoDB; false → mock en memoria
 DYNAMO_TABLE=TodosTable
 AWS_REGION=us-east-1
+CORS_ORIGIN=http://localhost:4200
 ```
 
 ## 📥 Instalación
