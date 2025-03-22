@@ -9,6 +9,8 @@
         "test": "jest"
     },
     "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.772.0",
+        "@aws-sdk/lib-dynamodb": "^3.772.0",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.1",
         "cors": "^2.8.5",

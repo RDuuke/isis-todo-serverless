@@ -15,9 +15,12 @@ import { DeleteTodoUsecase } from "./core/application/delete-todo.usecase";
 import { DeleteController } from "./web/controllers/delete.controller";
 import { deleteTodoRoute } from "./web/routes/delete.routes";
 import { apiKeyMiddleware } from './web/middleware/api-key.middleware';
+import { TodoDynamoRepository } from './core/infrastructure/repository/todo.dynamo.repository';
 
-
-const repo = new TodoMockRepository();
+const repo = process.env.USE_DYNAMO === 'true'
+  ? new TodoDynamoRepository()
+  : new TodoMockRepository();
+  
 const create_usecase = new CreateTodoUseCase(repo);
 const create_controller = new CreateController(create_usecase);
 const get_usecase = new GetAllTodoUsecase(repo);
@@ -28,7 +31,7 @@ const delete_usecase = new DeleteTodoUsecase(repo);
 const delete_controller = new DeleteController(delete_usecase);
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:4200' }));
+app.use(cors({ origin: process.env.CORS_ORIGIN }));
 
 app.use(express.json());
 app.use('/api/todos', apiKeyMiddleware);
