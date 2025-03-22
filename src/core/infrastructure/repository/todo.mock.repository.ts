@@ -19,4 +19,10 @@ export class TodoMockRepository implements TodoRepository {
         return this.todos;
     }
 
+    async update(todo: TodoItem): Promise<TodoItem> {
+        const index = this.todos.findIndex(t => t.id === todo.id);
+        if (index === -1) throw new Error('Todo not found');
+        this.todos[index] = todo;
+        return todo;
+      }
 }
