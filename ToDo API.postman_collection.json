@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "3e42db68-5b32-41cd-8619-c22ec83f97f8",
+		"name": "ToDo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23777386"
+	},
+	"item": [
+		{
+			"name": "Create TODO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\":\"Sample task\",\"completed\":false}"
+				},
+				"url": "{{base_url}}/api/todos"
+			},
+			"response": []
+		},
+		{
+			"name": "List TODOs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{api_key}}"
+					}
+				],
+				"url": "{{base_url}}/api/todos"
+			},
+			"response": []
+		},
+		{
+			"name": "Update TODO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-api-key",
+						"value": "{{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\":\"Updated task\",\"completed\":true}"
+				},
+				"url": "{{base_url}}/api/todos/{{todo_id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete TODO",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{api_key}}"
+					}
+				],
+				"url": "{{base_url}}/api/todos/{{todo_id}}"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "api_key",
+			"value": "mi-secreta-api-key",
+			"type": "string"
+		},
+		{
+			"key": "todo_id",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
