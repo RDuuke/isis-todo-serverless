@@ -41,6 +41,12 @@ npm run dev
 - Carga en memoria (USE_DYNAMO=false)
 - API Key requerido en header x-api-key
 
+## ✅ Pruebas unitarias
+```bash
+npm test
+```
+
+
 ## 🔁 Endpoints
 | Método | Ruta             | Descripción           | Body JSON                                |
 |--------|------------------|-----------------------|------------------------------------------|
@@ -51,6 +57,12 @@ npm run dev
 
 ## 🔒 Seguridad
 Todas las peticiones requieren:`x-api-key: tu-api-key-secreta` Si falta o es inválida → 401 Unauthorized
+
+## 🚩 Postman
+Cómo usarlo:
+1. En Postman haz Import.
+2. Ve a Environments, crea uno nuevo llamado “ToDo API” y define base_url y api_key.
+3. Selecciona ese entorno y prueba cada request.
 
 ## 📦 Cambiar a DynamoDB
 
