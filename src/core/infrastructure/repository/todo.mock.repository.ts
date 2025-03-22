@@ -1,6 +1,7 @@
 import { TodoItem } from "../../domain/todo.model";
+import { TodoRepository } from "../../domain/todo.repository";
 
-export class TodoMockRepository {
+export class TodoMockRepository implements TodoRepository {
     private todos: TodoItem[] = [];
     private idCounter = 1;
 
@@ -13,4 +14,9 @@ export class TodoMockRepository {
         this.todos.push(todo);
         return todo;
     }
+
+    async get(): Promise<TodoItem[]> {
+        return this.todos;
+    }
+
 }
