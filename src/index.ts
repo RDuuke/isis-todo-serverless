@@ -10,6 +10,9 @@ import { GetAllTodoUsecase } from "./core/application/get-all-todo.usecase";
 import { updateTodoRoute } from "./web/routes/upate.routes";
 import { UpdateTodoUseCase } from "./core/application/update-todo.usecase";
 import { UpdateController } from "./web/controllers/update.controller";
+import { DeleteTodoUsecase } from "./core/application/delete-todo.usecase";
+import { DeleteController } from "./web/controllers/delete.controller";
+import { deleteTodoRoute } from "./web/routes/delete.routes";
 
 const repo = new TodoMockRepository();
 const create_usecase = new CreateTodoUseCase(repo);
@@ -18,6 +21,8 @@ const get_usecase = new GetAllTodoUsecase(repo);
 const list_controller = new ListController(get_usecase);
 const update_usecase = new UpdateTodoUseCase(repo);
 const update_controller = new UpdateController(update_usecase);
+const delete_usecase = new DeleteTodoUsecase(repo);
+const delete_controller = new DeleteController(delete_usecase);
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:4200' }));
@@ -26,4 +31,6 @@ app.use(express.json());
 app.use("/api", createTodoRoute(create_controller));
 app.use("/api", listTodoRoute(list_controller));
 app.use('/api', updateTodoRoute(update_controller));
+app.use('/api', deleteTodoRoute(delete_controller));
+
 app.listen(3000, () => console.log("Server is running on port 3000"));
