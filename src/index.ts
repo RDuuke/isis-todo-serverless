@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import { CreateTodoUseCase } from "./core/application/create-todo.usecase";
@@ -13,6 +14,8 @@ import { UpdateController } from "./web/controllers/update.controller";
 import { DeleteTodoUsecase } from "./core/application/delete-todo.usecase";
 import { DeleteController } from "./web/controllers/delete.controller";
 import { deleteTodoRoute } from "./web/routes/delete.routes";
+import { apiKeyMiddleware } from './web/middleware/api-key.middleware';
+
 
 const repo = new TodoMockRepository();
 const create_usecase = new CreateTodoUseCase(repo);
@@ -28,6 +31,7 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:4200' }));
 
 app.use(express.json());
+app.use('/api/todos', apiKeyMiddleware);
 app.use("/api", createTodoRoute(create_controller));
 app.use("/api", listTodoRoute(list_controller));
 app.use('/api', updateTodoRoute(update_controller));
