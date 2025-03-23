@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CreateController } from "../controllers/create.controller";
 import { validateDto } from "../middleware/validate.dto";
-import { CreateTodoDto } from "../../core/application/dtos/create-todo.dto";
+import { CreateTodoDto } from "../dtos/create-todo.dto";
 
 export function createTodoRoute(controller: CreateController) {
     const router = Router();
