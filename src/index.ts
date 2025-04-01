@@ -17,7 +17,7 @@ import { deleteTodoRoute } from "./web/routes/delete.routes";
 import { apiKeyMiddleware } from './web/middleware/api-key.middleware';
 import { TodoDynamoRepository } from './core/infrastructure/repository/todo.dynamo.repository';
 
-const repo = process.env.USE_DYNAMO === 'true'
+const repo = process.env.PROD === 'true'
   ? new TodoDynamoRepository()
   : new TodoMockRepository();
   
