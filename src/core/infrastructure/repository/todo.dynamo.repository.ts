@@ -16,7 +16,7 @@ export class TodoDynamoRepository implements TodoRepository {
 			completed: todo.completed ?? false,
 			dueDate: todo.dueDate
 		};
-		await client.send(new PutCommand({ TableName: TABLE, Item: marshall(item) }));
+		await client.send(new PutCommand({ TableName: TABLE, Item: item }));
 		return item;
 	}
 
