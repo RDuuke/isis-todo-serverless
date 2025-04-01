@@ -1,4 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { marshall } from '@aws-sdk/util-dynamodb';
 import { DynamoDBDocumentClient, PutCommand, ScanCommand, UpdateCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { TodoRepository } from "../../domain/todo.repository";
 import { TodoItem } from "../../domain/todo.model";
@@ -15,8 +16,7 @@ export class TodoDynamoRepository implements TodoRepository {
 			completed: todo.completed ?? false,
 			dueDate: todo.dueDate
 		};
-		console.log("Creating item in DynamoDB:", item, typeof item.id);
-		await client.send(new PutCommand({ TableName: TABLE, Item: item }));
+		await client.send(new PutCommand({ TableName: TABLE, Item: marshall(item) }));
 		return item;
 	}
 
