@@ -6,7 +6,7 @@ export class CreateController {
 
     async handle(req: Request, res: Response) {
         try {
-            const todo = await this.usecase.execute(req.body.text);
+            const todo = await this.usecase.execute(req.body);
             res.status(201).json(todo);
         } catch (error: any) {
             res.status(400).json({ error: error.message });

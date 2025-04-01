@@ -5,14 +5,15 @@ export class TodoMockRepository implements TodoRepository {
     private todos: TodoItem[] = [];
     private idCounter = 1;
 
-    async create(text: string): Promise<TodoItem> {
-        const todo: TodoItem = {
+    async create(todo: Partial<TodoItem>): Promise<TodoItem> {
+        const newTodo: TodoItem = {
             id: this.idCounter++,
-            text,
-            completed: false
+            text: todo.text ?? "",
+            completed: todo.completed ?? false,
+            dueDate: todo.dueDate
         };
-        this.todos.push(todo);
-        return todo;
+        this.todos.push(newTodo);
+        return newTodo;
     }
 
     async get(): Promise<TodoItem[]> {

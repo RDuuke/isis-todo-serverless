@@ -5,7 +5,12 @@ export class CreateTodoDto {
     @IsNotEmpty({ message: 'Text is required' })
     text!: string;
 
+    @IsString({ message: 'Due date must be a string' })
+    @IsNotEmpty({ message: 'Due date is required' })
+    dueDate!: string;
+    
     @IsOptional()
     @IsBoolean()
     completed?: boolean;
+
 }
