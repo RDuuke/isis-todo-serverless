@@ -1,16 +1,23 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { marshall } from '@aws-sdk/util-dynamodb';
 import { DynamoDBDocumentClient, PutCommand, ScanCommand, UpdateCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import { TodoRepository } from "../../domain/todo.repository";
 import { TodoItem } from "../../domain/todo.model";
 
 const TABLE = process.env.DYNAMO_TABLE!;
-const client = DynamoDBDocumentClient.from(new DynamoDBClient({ region: process.env.AWS_REGION }));
-
+const client = DynamoDBDocumentClient.from(
+	new DynamoDBClient({
+	  region: process.env.AWS_REGION || 'us-east-1',
+	  endpoint: 'http://localhost:8000',
+	  credentials:{
+			accessKeyId: 'fake',
+			secretAccessKey: 'fake'
+		  }
+})
+  );
 export class TodoDynamoRepository implements TodoRepository {
 
 	async create(todo: Partial<TodoItem>): Promise<TodoItem> {
-		const item: TodoItem = {
+ 		const item: TodoItem = {
 			id: Date.now(),
 			text: todo.text ?? "",
 			completed: todo.completed ?? false,
@@ -29,7 +36,8 @@ export class TodoDynamoRepository implements TodoRepository {
 		await client.send(new UpdateCommand({
 			TableName: TABLE,
 			Key: { id: todo.id },
-			UpdateExpression: "SET text = :t, completed = :c",
+			UpdateExpression: "SET #t = :t, completed = :c",
+			ExpressionAttributeNames: { "#t": "text" },
 			ExpressionAttributeValues: { ":t": todo.text, ":c": todo.completed }
 		}));
 		return todo;
