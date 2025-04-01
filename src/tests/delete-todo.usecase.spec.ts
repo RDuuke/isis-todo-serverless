@@ -8,7 +8,7 @@ describe('DeleteTodoUsecase', () => {
 
   beforeEach(async () => {
     repo = new TodoMockRepository();
-    await repo.create('ToDelete');
+    await repo.create({ text: 'Task 1', completed: false, dueDate: new Date('2023-10-01').toISOString() });
     useCase = new DeleteTodoUsecase(repo);
   });
 
