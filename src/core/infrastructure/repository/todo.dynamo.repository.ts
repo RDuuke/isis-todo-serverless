@@ -14,7 +14,8 @@ export class TodoDynamoRepository implements TodoRepository {
 			text: todo.text ?? "",
 			completed: todo.completed ?? false,
 			dueDate: todo.dueDate
-		}; 
+		};
+		console.log("Creating item in DynamoDB:", item, typeof item.id);
 		await client.send(new PutCommand({ TableName: TABLE, Item: item }));
 		return item;
 	}
