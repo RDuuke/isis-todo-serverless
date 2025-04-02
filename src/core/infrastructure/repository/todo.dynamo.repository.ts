@@ -4,16 +4,8 @@ import { TodoRepository } from "../../domain/todo.repository";
 import { TodoItem } from "../../domain/todo.model";
 
 const TABLE = process.env.DYNAMO_TABLE!;
-const client = DynamoDBDocumentClient.from(
-	new DynamoDBClient({
-	  region: process.env.AWS_REGION || 'us-east-1',
-	  endpoint: 'http://localhost:8000',
-	  credentials:{
-			accessKeyId: 'fake',
-			secretAccessKey: 'fake'
-		  }
-})
-  );
+const client = DynamoDBDocumentClient.from(new DynamoDBClient({ region: process.env.AWS_REGION }));
+
 export class TodoDynamoRepository implements TodoRepository {
 
 	async create(todo: Partial<TodoItem>): Promise<TodoItem> {
@@ -21,7 +13,8 @@ export class TodoDynamoRepository implements TodoRepository {
 			id: Date.now(),
 			text: todo.text ?? "",
 			completed: todo.completed ?? false,
-			dueDate: todo.dueDate
+			dueDate: todo.dueDate,
+			important: todo.important ?? false
 		};
 		await client.send(new PutCommand({ TableName: TABLE, Item: item }));
 		return item;

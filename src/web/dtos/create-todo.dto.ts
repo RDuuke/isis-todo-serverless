@@ -13,4 +13,7 @@ export class CreateTodoDto {
     @IsBoolean()
     completed?: boolean;
 
+    @IsOptional()
+    @IsBoolean()
+    important?: boolean;
 }

@@ -12,6 +12,7 @@ export class CreateTodoUseCase {
             {
                 ...todo,
                 completed: todo.completed ?? false,
+                important: todo.important ?? false,
                 dueDate: todo.dueDate
             }
         );

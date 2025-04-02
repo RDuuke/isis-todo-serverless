@@ -8,4 +8,8 @@ export class UpdateTodoDto {
     @IsBoolean({ message: 'Completed must be a boolean' })
     @IsNotEmpty({ message: 'Completed is required' })
     completed!: boolean;
+
+    @IsBoolean({ message: 'Important must be a boolean' })
+    @IsNotEmpty({ message: 'Important is required' })
+    important!: boolean;
 }

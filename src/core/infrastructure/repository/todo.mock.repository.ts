@@ -10,6 +10,7 @@ export class TodoMockRepository implements TodoRepository {
             id: this.idCounter++,
             text: todo.text ?? "",
             completed: todo.completed ?? false,
+            important: todo.important ?? false,
             dueDate: todo.dueDate
         };
         this.todos.push(newTodo);
